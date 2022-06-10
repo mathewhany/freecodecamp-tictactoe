@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - TicTacToe</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Gloria+Hallelujah'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="app">
+  <div class="game">
+    <div class="game-configurator" v-show="showGameConfigurator">
+      <h2>Choose Game Mode</h2>
+      <div class="game-mode">
+        <label for="1-player">
+          <input type="radio" name="gameMode" :value="true" v-model="enableAI"> 
+          1 Player
+        </label>
+        <label for="2-player">
+          <input type="radio" name="gameMode" :value="false" v-model="enableAI">
+          2 Player
+        </label>
+      </div>
+      <div class="first-player">
+        <label for="player-x">
+          <input type="radio" name="player" value="X" v-model="firstPlayer"> X    
+        </label>
+        <label for="player-y">
+          <input type="radio" name="player" value="O" v-model="firstPlayer"> O
+        </label>
+      </div>
+
+      <button @click="startGame" :disabled="firstPlayer === '' || enableAI === ''">Start Game</button>
+    </div>
+    <div v-if="!showGameConfigurator">
+      <div class="score">
+        <span class="x-score"> X: {{ score.X }}</span>
+        <span class="game-status">{{ gameStatusMsg }}</span>
+        <span class="o-score">O: {{ score.O }}</span>
+      </div>
+
+      <div class="board">
+        <div class="cell" :class="{ highlight: highlight.indexOf(i) != -1}" v-for="(cell, i) in board" @click="playAt(i)">
+          {{ cell }}
+        </div>
+      </div>
+
+
+      <button @click="reset">Restart</button>
+      <button @click="playBestMove">Play for Me!</button>
+    </div>
+  </div>
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
